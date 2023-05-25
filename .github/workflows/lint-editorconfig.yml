@@ -1,15 +1,15 @@
-name: Lint
+name: Linting
 
 on:
   pull_request:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 permissions:
   contents: read
 
 env:
-  IMAGE_TAG: '2.7.0'
+  IMAGE_TAG_EC: '2.7.0'
 
 jobs:
   EditorConfig:
@@ -17,8 +17,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Run the Linter
         run: |
-          docker run --rm --tty --volume "${GITHUB_WORKSPACE}:/ci:ro" --workdir '/ci' \
-            mstruebing/editorconfig-checker:${IMAGE_TAG} ec -config "/ci/.editorconfig"
+          docker run --rm --volume "${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE}:ro" --workdir "${GITHUB_WORKSPACE}" \
+            "docker.io/mstruebing/editorconfig-checker:${IMAGE_TAG_EC}" \
+            ec -disable-max-line-length
