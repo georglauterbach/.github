@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  IMAGE_TAG: '2.7.0'
+
 jobs:
   EditorConfig:
     runs-on: ubuntu-22.04
@@ -17,9 +20,5 @@ jobs:
 
       - name: Run the Linter
         run: |
-          docker run --rm --tty \
-            --volume "${REPOSITORY_ROOT}:/ci:ro" \
-            --workdir "${GITHUB_WORKSPACE}" \
-            --name dms-test_eclint \
-            mstruebing/editorconfig-checker:2.7.0 \
-              ec -config "${GITHUB_WORKSPACE}/.editorconfig"
+          docker run --rm --tty --volume "${GITHUB_WORKSPACE}:/ci:ro" --workdir '/ci' \
+            mstruebing/editorconfig-checker:${IMAGE_TAG} ec -config "/ci/.editorconfig"
