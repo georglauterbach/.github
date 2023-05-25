@@ -1,0 +1,25 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+jobs:
+  EditorConfig:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run the Linter
+        run: |
+          docker run --rm --tty \
+            --volume "${REPOSITORY_ROOT}:/ci:ro" \
+            --workdir "${GITHUB_WORKSPACE}" \
+            --name dms-test_eclint \
+            mstruebing/editorconfig-checker:2.7.0 \
+              ec -config "${GITHUB_WORKSPACE}/.editorconfig"

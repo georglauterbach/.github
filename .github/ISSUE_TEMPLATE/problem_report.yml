@@ -1,0 +1,39 @@
+name: Problem Report
+description: File a problem report
+title: 'problem report: '
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        By submitting this issue you agree to this project's Code of Conduct!
+
+  - type: checkboxes
+    attributes:
+      label: Preliminary Checks
+      description: Please read these carefully.
+      options:
+        - label: I searched the issue tracker but was unable to find a similar / the same issue.
+          required: true
+
+  - type: textarea
+    attributes:
+      label: What happened and when does this occur?
+      description: >
+        Tell us what happened.
+        **It would also help immensely if you can share precise steps on how to reproduce the issue!** :heart:
+        Use [fenced code blocks](https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#fenced-code-blocks) when pasting lots of text!
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: What did you expect to happen?
+      description: Tell us what you expected.
+      placeholder: I expected to see debug messages.
+    validations:
+      required: true
+  - type: textarea
+    id: container-configuration-files
+    attributes:
+      label: Container configuration files
