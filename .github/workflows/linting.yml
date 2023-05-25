@@ -24,4 +24,4 @@ jobs:
         run: |
           docker run --rm --volume "${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE}:ro" --workdir "${GITHUB_WORKSPACE}" \
             "docker.io/mstruebing/editorconfig-checker:${IMAGE_TAG_EC}" \
-            ec -disable-max-line-length
+            ec -disable-max-line-length -exclude '^.git'
